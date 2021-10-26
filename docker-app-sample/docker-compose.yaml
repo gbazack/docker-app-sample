@@ -1,0 +1,26 @@
+version: "3.3"
+
+services:  
+  mysqldb:
+    image: mariadb:10.3
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=secretpass
+    volumes:
+      - mysql:/var/lib/mysql
+      - mysql_config:/etc/mysql
+
+  web_service:
+    build:
+      context: .
+    environment:
+      - DB_SERVER
+      - DB_USER
+      - DB_PASSWD
+      - DB_NAME
+    volumes:
+      - ./:/app
+
+volumes:
+  mysql: {}
+  mysql_config: {}
