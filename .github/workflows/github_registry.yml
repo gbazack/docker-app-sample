@@ -36,7 +36,8 @@ jobs:
         with:
           context: ./
           file: ./Dockerfile
-          push: True
+          builder: ${{ steps.buildx.outputs.name }}
+          push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/docker-app-sample:latest
       # Image digest
       - name: Image Digest
